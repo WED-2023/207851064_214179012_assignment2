@@ -1,14 +1,28 @@
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
   background-color: #000;
   color: #fff;
+  direction: rtl;
 }
 
 header, nav, footer {
   padding: 10px;
   text-align: center;
   background-color: #111;
+}
+
+nav button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #222;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #333;
 }
 
 #content .screen {
@@ -19,3 +33,10 @@ header, nav, footer {
 #content .active {
   display: block;
 }
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+}
+
