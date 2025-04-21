@@ -116,6 +116,15 @@ window.onload = () => {
     opt.text = d;
     daySelect.appendChild(opt);
   }
+  // Populate shoot key dropdown (A-Z + space)
+const shootKeySelect = document.getElementById('shootKey');
+for (let i = 65; i <= 90; i++) {
+  const letter = String.fromCharCode(i);
+  const opt = document.createElement('option');
+  opt.value = letter;
+  opt.text = letter;
+  shootKeySelect.appendChild(opt);
+}
 };
 // ABOUT MODAL Logic
 const aboutModal = document.getElementById('aboutModal');
@@ -145,6 +154,33 @@ document.addEventListener('keydown', (event) => {
     aboutModal.style.display = 'none';
   }
 });
+let gameSettings = {};
+
+function startGame(event) {
+  event.preventDefault();
+
+  const shootKey = document.getElementById('shootKey').value;
+  const gameTime = parseInt(document.getElementById('gameTime').value);
+  const playerColor = document.getElementById('playerColor').value;
+  const enemyColor = document.getElementById('enemyColor').value;
+
+  if (gameTime < 2) {
+    alert("Game time must be at least 2 minutes.");
+    return false;
+  }
+
+  gameSettings = {
+    shootKey,
+    gameTime,
+    playerColor,
+    enemyColor
+  };
+
+  console.log("Game Settings:", gameSettings);
+  navigate('game'); // go to game screen
+  return false;
+}
+
 
 
 
