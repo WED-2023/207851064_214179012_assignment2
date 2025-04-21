@@ -117,5 +117,34 @@ window.onload = () => {
     daySelect.appendChild(opt);
   }
 };
+// ABOUT MODAL Logic
+const aboutModal = document.getElementById('aboutModal');
+const aboutButton = document.querySelector('button[onclick="navigate(\'about\')"]');
+const closeAbout = document.getElementById('closeAbout');
+
+// Open modal when clicking "About"
+aboutButton.addEventListener('click', () => {
+  aboutModal.style.display = 'block';
+});
+
+// Close modal on X
+closeAbout.addEventListener('click', () => {
+  aboutModal.style.display = 'none';
+});
+
+// Close modal when clicking outside content
+window.addEventListener('click', (event) => {
+  if (event.target === aboutModal) {
+    aboutModal.style.display = 'none';
+  }
+});
+
+// Close modal on ESC key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    aboutModal.style.display = 'none';
+  }
+});
+
 
 
