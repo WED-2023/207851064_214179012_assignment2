@@ -2,6 +2,10 @@ function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
   document.getElementById(screenId).classList.add("active");
+
+  if (screenId === "game") {
+    initGame();
+  }
 }
 // Array of users
 let users = [
@@ -180,6 +184,98 @@ function startGame(event) {
   navigate('game'); // go to game screen
   return false;
 }
+let canvas, ctx;
+let player, enemies = [];
+let keysPressed = {};
+let gameInterval, moveEnemiesDir = 1;
+let enemySpeed = 1;
+let enemySpeedIncreaseCount = 0;
+
+function initGame() {
+  canvas = document.getElementById("gameCanvas");
+  ctx = canvas.getContext("2d");
+
+  player = {
+    x: Math.random() * (canvas.width - 50),
+    y: canvas.height - 60,
+    width: 40,
+    height: 40,
+    color: gameSettings.playerColor || "#00ffcc",
+    speed: 5
+  };
+  enemies = [];
+  const rows = 4;
+  const cols = 5;
+  const spacing = 80;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      enemies.push({
+        x: 100 + c * spacing,
+        y: 50 + r * 50,
+        width: 40,
+        height: 30,
+        row: r,
+        color: gameSettings.enemyColor || "#ff3366"
+      });
+    }
+  }
+
+
+  document.addEventListener("keydown", e => keysPressed[e.key] = true);
+  document.addEventListener("keyup", e => keysPressed[e.key] = false);
+
+  gameInterval = setInterval(gameLoop, 1000 / 60);
+  setInterval(increaseEnemySpeed, 5000);
+}
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (keysPressed["ArrowLeft"] && player.x > 0) player.x -= player.speed;
+  if (keysPressed["ArrowRight"] && player.x + player.width < canvas.width) player.x += player.speed;
+  if (keysPressed["ArrowUp"] && player.y > canvas.height * 0.6) player.y -= player.speed;
+  if (keysPressed["ArrowDown"] && player.y + player.height < canvas.height) player.y += player.speed;
+
+  drawPlayer();
+  moveEnemies();
+  drawEnemies();
+}
+
+function drawPlayer() {
+  ctx.fillStyle = player.color;
+  ctx.fillRect(player.x, player.y, player.width, player.height);
+}
+
+function drawEnemies() {
+  for (let enemy of enemies) {
+    ctx.fillStyle = enemy.color;
+    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+  }
+}
+
+function moveEnemies() {
+  const rightMost = Math.max(...enemies.map(e => e.x + e.width));
+  const leftMost = Math.min(...enemies.map(e => e.x));
+
+  if (rightMost >= canvas.width || leftMost <= 0) {
+    moveEnemiesDir *= -1;
+    for (let e of enemies) {
+      e.y += 10; // ירידה שורתית
+    }
+  }
+
+  for (let e of enemies) {
+    e.x += moveEnemiesDir * enemySpeed;
+  }
+}
+
+function increaseEnemySpeed() {
+  if (enemySpeedIncreaseCount < 4) {
+    enemySpeed += 0.5;
+    enemySpeedIncreaseCount++;
+  }
+}
+
 
 
 
