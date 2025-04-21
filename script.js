@@ -5,7 +5,7 @@ function navigate(screenId) {
 }
 // Array of users
 let users = [
-  { username: 'p', password: 'testuser' } // default user
+  { username: 'p', password: 'testuser', email: 'default@user.com' }
 ];
 
 function handleRegister(event) {
