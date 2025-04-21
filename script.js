@@ -260,7 +260,7 @@ function moveEnemies() {
   if (rightMost >= canvas.width || leftMost <= 0) {
     moveEnemiesDir *= -1;
     for (let e of enemies) {
-      e.y += 10; // ירידה שורתית
+      e.y += 10; 
     }
   }
 
