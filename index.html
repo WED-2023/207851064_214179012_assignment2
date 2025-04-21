@@ -60,6 +60,29 @@
   </form>
   <p id="loginError" style="color: red;"></p>
 </div>
+    <!-- Configuration Screen -->
+<div id="config" class="screen">
+  <h2>Game Configuration</h2>
+
+  <form id="configForm" onsubmit="return startGame(event)">
+    <label for="shootKey">Choose a shoot key:</label>
+    <select id="shootKey" required>
+      <option value=" ">Space</option>
+    </select><br /><br />
+
+    <label for="gameTime">Game duration (in minutes):</label>
+    <input type="number" id="gameTime" min="2" value="2" required /><br /><br />
+
+    <label for="playerColor">Player ship color:</label>
+    <input type="color" id="playerColor" value="#00ffcc" /><br /><br />
+
+    <label for="enemyColor">Enemy ship color:</label>
+    <input type="color" id="enemyColor" value="#ff3366" /><br /><br />
+
+    <button type="submit">Start Game</button>
+  </form>
+</div>
+
 
     <!-- Game Screen (accessible only after login) -->
     <div id="game" class="screen">
