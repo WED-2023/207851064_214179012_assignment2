@@ -29,16 +29,35 @@
     </div>
 
     <!-- Registration Screen -->
-    <div id="register" class="screen">
-      <h2>Register</h2>
-      <!-- To be implemented -->
-    </div>
+<div id="register" class="screen">
+  <h2>Register</h2>
+  <form id="registerForm" onsubmit="return handleRegister(event)">
+    <label>Username: <input type="text" id="regUsername" required /></label><br />
+    <label>Password: <input type="password" id="regPassword" required /></label><br />
+    <label>Confirm Password: <input type="password" id="regConfirmPassword" required /></label><br />
+    <label>First Name: <input type="text" id="regFirstName" required /></label><br />
+    <label>Last Name: <input type="text" id="regLastName" required /></label><br />
+    <label>Email: <input type="email" id="regEmail" required /></label><br />
+    <label>Birth Date:
+      <select id="regYear"></select>
+      <select id="regMonth"></select>
+      <select id="regDay"></select>
+    </label><br />
+    <button type="submit">Submit</button>
+  </form>
+  <p id="registerError" style="color: red;"></p>
+</div>
 
     <!-- Login Screen -->
-    <div id="login" class="screen">
-      <h2>Login</h2>
-      <!-- To be implemented -->
-    </div>
+<div id="login" class="screen">
+  <h2>Login</h2>
+  <form id="loginForm" onsubmit="return handleLogin(event)">
+    <label>Username: <input type="text" id="loginUsername" required /></label><br />
+    <label>Password: <input type="password" id="loginPassword" required /></label><br />
+    <button type="submit">Login</button>
+  </form>
+  <p id="loginError" style="color: red;"></p>
+</div>
 
     <!-- Game Screen (accessible only after login) -->
     <div id="game" class="screen">
