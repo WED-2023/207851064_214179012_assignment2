@@ -1,0 +1,21 @@
+body {
+  font-family: Arial;
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+header, nav, footer {
+  padding: 10px;
+  text-align: center;
+  background-color: #111;
+}
+
+#content .screen {
+  display: none;
+  padding: 20px;
+}
+
+#content .active {
+  display: block;
+}
