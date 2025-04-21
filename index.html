@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,31 +8,47 @@
 </head>
 <body>
   <header>
-    <h1>Spaceship Game</h1>
-    <img src="logo.png" alt="logo" />
+    <h1>Space Game</h1>
+    <img src="logo.png" alt="Game Logo" width="100" />
   </header>
 
   <nav id="menu">
-    <button onclick="navigate('welcome')">Home Page</button>
+    <button onclick="navigate('welcome')">Home</button>
     <button onclick="navigate('about')">About</button>
   </nav>
 
   <main id="content">
+    <!-- Welcome Screen -->
     <div id="welcome" class="screen active">
-      <h2>WELCOME!</h2>
-      <p>Name + ID</p>
-      <button onclick="navigate('register')">Sign up</button>
+      <h2>Welcome to the Space Game!</h2>
+      <p>Name: Naveh Harel</p>
+      <p>ID: 123456789</p>
+      <p><a href="https://example1.github.io" target="_blank">Website 1</a> | <a href="https://example2.github.io" target="_blank">Website 2</a></p>
+      <button onclick="navigate('register')">Register</button>
       <button onclick="navigate('login')">Login</button>
     </div>
 
-    <div id="register" class="screen">...</div>
-    <div id="login" class="screen">...</div>
-    <div id="game" class="screen">...</div>
-    <div id="config" class="screen">...</div>
+    <!-- Registration Screen -->
+    <div id="register" class="screen">
+      <h2>Register</h2>
+      <!-- To be implemented -->
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login" class="screen">
+      <h2>Login</h2>
+      <!-- To be implemented -->
+    </div>
+
+    <!-- Game Screen (accessible only after login) -->
+    <div id="game" class="screen">
+      <h2>Game Screen</h2>
+      <!-- To be implemented -->
+    </div>
   </main>
 
   <footer>
-    <p>For additional deatails: naveh231g@gmail.com</p>
+    <p>Contact: naveh231g@gmail.com</p>
   </footer>
 
   <script src="script.js"></script>
