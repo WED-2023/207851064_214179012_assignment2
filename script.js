@@ -274,6 +274,10 @@ function gameLoop() {
   ctx.font = "18px Arial";
   ctx.fillText("Score: " + score, 20, 20);
   ctx.fillText("Lives: " + lives, 20, 40);
+  if (enemies.length === 0) {
+  endGame("win");
+}
+
 
 
 
@@ -405,12 +409,49 @@ function checkCollisions() {
       break;
     }
   }
+  if (lives <= 0) {
+  endGame("death");
+}
+
 }
 
 function resetPlayerPosition() {
   player.x = Math.random() * (canvas.width - 50);
   player.y = canvas.height - 60;
 }
+const sounds = {
+  shoot: new Audio("798849__amypix__sci-fi-gunshot.wav"),
+  enemyShoot: new Audio("797452__markusrobam__gunshot.wav"),
+  hitEnemy: new Audio("799459__copyc4t__wooden-door-percussion-hits.wav"),
+  playerHit: new Audio("798875__artninja__tmnt_2012_inspired_heavy_kick_thud_sounds_final_04152025.wav"),
+  bgMusic: new Audio("798275__kontraa__hovecraft-hyperpop-instrumental.mp3")
+};
+sounds.bgMusic.loop = true;
+shoot.play();
+enemyShoot.play();
+hitEnemy.play();
+playerHit.play();
+bgMusic.play();
+bgMusic.pause();
+bgMusic.currentTime = 0;
+function endGame(reason) {
+  clearInterval(gameInterval);
+  clearInterval(gameTimerInterval);
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+
+  if (reason === "time") {
+    alert("Time's up! Game over.");
+  } else if (reason === "death") {
+    alert("You lost all your lives!");
+  } else if (reason === "win") {
+    alert("You won!");
+  }
+
+  navigate("welcome"); 
+}
+
+
 
 
 
