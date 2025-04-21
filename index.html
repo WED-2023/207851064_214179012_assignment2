@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Spaceship Game</h1>
+    <img src="logo.png" alt="logo" />
+  </header>
+
+  <nav id="menu">
+    <button onclick="navigate('welcome')">Home Page</button>
+    <button onclick="navigate('about')">About</button>
+  </nav>
+
+  <main id="content">
+    <div id="welcome" class="screen active">
+      <h2>WELCOME!</h2>
+      <p>Name + ID</p>
+      <button onclick="navigate('register')">Sign up</button>
+      <button onclick="navigate('login')">Login</button>
+    </div>
+
+    <div id="register" class="screen">...</div>
+    <div id="login" class="screen">...</div>
+    <div id="game" class="screen">...</div>
+    <div id="config" class="screen">...</div>
+  </main>
+
+  <footer>
+    <p>For additional deatails: naveh231g@gmail.com</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
