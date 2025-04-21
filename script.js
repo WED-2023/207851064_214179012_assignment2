@@ -51,16 +51,23 @@ function handleRegister(event) {
     return false;
   }
 
+  const emailInUse = users.some(user => user.email === email);
+  if (emailInUse) {
+    error.textContent = 'This email is already registered.';
+    return false;
+  }
+
   const passwordInUse = users.some(user => user.password === password);
   if (passwordInUse) {
     error.textContent = 'This password is already in use. Please choose a different one.';
     return false;
   }
-  users.push({ username, password });
+  users.push({ username, password, email });
   alert('Registration successful!');
   navigate('login');
   return false;
 }
+
 
 function handleLogin(event) {
   event.preventDefault();
