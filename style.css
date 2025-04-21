@@ -97,6 +97,13 @@ input, select {
   padding: 5px;
   margin: 5px;
 }
+#gameCanvas {
+  display: block;
+  margin: 0 auto;
+  background-color: #000;
+  border: 2px solid #fff;
+}
+
 
 
 
