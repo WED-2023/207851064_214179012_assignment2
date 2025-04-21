@@ -72,4 +72,32 @@ function handleLogin(event) {
     error.textContent = 'Invalid username or password.';
   }
 }
+window.onload = () => {
+  // Create options for date dropdowns
+  const yearSelect = document.getElementById('regYear');
+  const monthSelect = document.getElementById('regMonth');
+  const daySelect = document.getElementById('regDay');
+
+  for (let y = 2024; y >= 1900; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.text = y;
+    yearSelect.appendChild(opt);
+  }
+
+  for (let m = 1; m <= 12; m++) {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.text = m;
+    monthSelect.appendChild(opt);
+  }
+
+  for (let d = 1; d <= 31; d++) {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.text = d;
+    daySelect.appendChild(opt);
+  }
+};
+
 
