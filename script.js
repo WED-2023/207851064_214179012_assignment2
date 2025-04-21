@@ -1,3 +1,9 @@
+let playerBullet = null;
+let enemyBullets = [];
+let canShoot = true;
+let lastEnemyShotTime = 0;
+let timeLeft; 
+let gameTimerInterval;
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
@@ -194,6 +200,15 @@ let enemySpeedIncreaseCount = 0;
 function initGame() {
   canvas = document.getElementById("gameCanvas");
   ctx = canvas.getContext("2d");
+  timeLeft = gameSettings.gameTime * 60;
+
+  gameTimerInterval = setInterval(() => {
+  timeLeft--;
+  if (timeLeft <= 0) {
+    endGame("time");
+  }
+}, 1000);
+
 
   player = {
     x: Math.random() * (canvas.width - 50),
@@ -221,7 +236,14 @@ function initGame() {
   }
 
 
-  document.addEventListener("keydown", e => keysPressed[e.key] = true);
+  document.addEventListener("keydown", (e) => {
+  keysPressed[e.key] = true;
+
+  if (e.key === gameSettings.shootKey && canShoot && !playerBullet) {
+    shootPlayerBullet();
+  }
+});
+
   document.addEventListener("keyup", e => keysPressed[e.key] = false);
 
   gameInterval = setInterval(gameLoop, 1000 / 60);
@@ -230,6 +252,11 @@ function initGame() {
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let minutes = Math.floor(timeLeft / 60);
+  let seconds = timeLeft % 60;
+  let timeDisplay = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  ctx.fillText("Time Left: " + timeDisplay, 20, 60);
+
 
   if (keysPressed["ArrowLeft"] && player.x > 0) player.x -= player.speed;
   if (keysPressed["ArrowRight"] && player.x + player.width < canvas.width) player.x += player.speed;
@@ -239,6 +266,17 @@ function gameLoop() {
   drawPlayer();
   moveEnemies();
   drawEnemies();
+  handleEnemyShooting();
+  updateBullets();
+  checkCollisions();
+  drawBullets();
+  ctx.fillStyle = "#fff";
+  ctx.font = "18px Arial";
+  ctx.fillText("Score: " + score, 20, 20);
+  ctx.fillText("Lives: " + lives, 20, 40);
+
+
+
 }
 
 function drawPlayer() {
@@ -275,6 +313,108 @@ function increaseEnemySpeed() {
     enemySpeedIncreaseCount++;
   }
 }
+function shootPlayerBullet() {
+  playerBullet = {
+    x: player.x + player.width / 2 - 3,
+    y: player.y,
+    width: 6,
+    height: 12,
+    color: "#0f0",
+    speed: 7
+  };
+}
+function handleEnemyShooting() {
+  const now = Date.now();
+
+  if (enemyBullets.length === 0 || (enemyBullets.length > 0 && enemyBullets[0].y > canvas.height * 0.75)) {
+    if (now - lastEnemyShotTime > 1000) {
+      const shooters = enemies.filter(e => e); // enemies שעדיין קיימים
+      if (shooters.length > 0) {
+        const shooter = shooters[Math.floor(Math.random() * shooters.length)];
+        enemyBullets.push({
+          x: shooter.x + shooter.width / 2 - 3,
+          y: shooter.y + shooter.height,
+          width: 6,
+          height: 12,
+          color: "#f00",
+          speed: 4
+        });
+        lastEnemyShotTime = now;
+      }
+    }
+  }
+}
+function updateBullets() {
+  if (playerBullet) {
+    playerBullet.y -= playerBullet.speed;
+    if (playerBullet.y < 0) {
+      playerBullet = null;
+    }
+  }
+
+  enemyBullets = enemyBullets.filter(bullet => bullet.y < canvas.height);
+  for (let b of enemyBullets) {
+    b.y += b.speed;
+  }
+}
+
+function drawBullets() {
+  if (playerBullet) {
+    ctx.fillStyle = playerBullet.color;
+    ctx.fillRect(playerBullet.x, playerBullet.y, playerBullet.width, playerBullet.height);
+  }
+
+  for (let b of enemyBullets) {
+    ctx.fillStyle = b.color;
+    ctx.fillRect(b.x, b.y, b.width, b.height);
+  }
+}
+let score = 0;
+let lives = 3;
+
+function checkCollisions() {
+  if (playerBullet) {
+    for (let i = 0; i < enemies.length; i++) {
+      let e = enemies[i];
+      if (
+        playerBullet.x < e.x + e.width &&
+        playerBullet.x + playerBullet.width > e.x &&
+        playerBullet.y < e.y + e.height &&
+        playerBullet.y + playerBullet.height > e.y
+      ) {
+
+        score += (4 - e.row) * 5; // שורה 3 -> 5 נקודות, שורה 2 -> 10 וכו'
+        enemies.splice(i, 1);
+        playerBullet = null;
+        break;
+      }
+    }
+  }
+
+  for (let i = 0; i < enemyBullets.length; i++) {
+    let b = enemyBullets[i];
+    if (
+      b.x < player.x + player.width &&
+      b.x + b.width > player.x &&
+      b.y < player.y + player.height &&
+      b.y + b.height > player.y
+    ) {
+      lives--;
+      enemyBullets.splice(i, 1);
+      resetPlayerPosition();
+      break;
+    }
+  }
+}
+
+function resetPlayerPosition() {
+  player.x = Math.random() * (canvas.width - 50);
+  player.y = canvas.height - 60;
+}
+
+
+
+
 
 
 
