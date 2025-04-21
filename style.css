@@ -39,4 +39,15 @@ button {
   padding: 10px 20px;
   font-size: 1em;
 }
+form {
+  margin-top: 15px;
+  line-height: 2;
+}
+
+input, select {
+  padding: 5px;
+  margin: 5px;
+  width: 200px;
+}
+
 
