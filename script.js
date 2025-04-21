@@ -50,6 +50,10 @@ function handleRegister(event) {
     error.textContent = 'Username already exists.';
     return false;
   }
+  const passwordInUse = users.some(user => user.password === password);
+  if (passwordInUse) {
+  error.textContent = 'This password is already in use. Please choose a different one.';
+  return false;
 
   users.push({ username, password });
   alert('Registration successful!');
