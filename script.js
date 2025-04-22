@@ -1,4 +1,5 @@
 let playerBullet = null;
+let enemyBulletSpeed = 4;
 let enemyBullets = [];
 let canShoot = true;
 let lastEnemyShotTime = 0;
@@ -314,6 +315,7 @@ function moveEnemies() {
 function increaseEnemySpeed() {
   if (enemySpeedIncreaseCount < 4) {
     enemySpeed += 0.5;
+    enemyBulletSpeed += 0.5;
     enemySpeedIncreaseCount++;
   }
 }
@@ -341,7 +343,7 @@ function handleEnemyShooting() {
           width: 6,
           height: 12,
           color: "#f00",
-          speed: 4
+          speed: enemyBulletSpeed
         });
         lastEnemyShotTime = now;
       }
