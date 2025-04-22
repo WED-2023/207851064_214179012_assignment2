@@ -272,8 +272,8 @@ function gameLoop() {
   drawBullets();
   ctx.fillStyle = "#fff";
   ctx.font = "18px Arial";
-  ctx.fillText("Score: " + score, 20, 20);
-  ctx.fillText("Lives: " + lives, 20, 40);
+  ctx.textAlign = "center";
+  ctx.fillText("Score: " + score + " | Lives: " + lives + " | Time: " + timeDisplay, canvas.width / 2, 30);
   if (enemies.length === 0) {
   endGame("win");
 }
@@ -387,7 +387,7 @@ function checkCollisions() {
         playerBullet.y + playerBullet.height > e.y
       ) {
 
-        score += (4 - e.row) * 5; // שורה 3 -> 5 נקודות, שורה 2 -> 10 וכו'
+        score += (4 - e.row) * 5; 
         enemies.splice(i, 1);
         playerBullet = null;
         break;
@@ -416,7 +416,7 @@ function checkCollisions() {
 }
 
 function resetPlayerPosition() {
-  player.x = Math.random() * (canvas.width - 50);
+  player.x = 20;
   player.y = canvas.height - 60;
 }
 const sounds = {
