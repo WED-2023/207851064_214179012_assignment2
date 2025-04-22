@@ -98,16 +98,20 @@ input, select {
   margin: 5px;
 }
 #game {
-  background: url('gamepic.png') no-repeat center center;
-  background-size: cover;
-  position: relative;
+  background-color: black; 
+  text-align: center;
 }
 
 #gameCanvas {
-  background-color: transparent; 
+  background: url('gamepic.png') no-repeat center center;
+  background-size: cover;
+  width: 900px;
+  height: 600px;
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
+  border: 2px solid white;
 }
+
 
 
 
