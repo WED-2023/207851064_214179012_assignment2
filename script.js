@@ -256,7 +256,7 @@ function gameLoop() {
   let minutes = Math.floor(timeLeft / 60);
   let seconds = timeLeft % 60;
   let timeDisplay = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-  ctx.fillText("Time Left: " + timeDisplay, 20, 60);
+  //ctx.fillText("Time Left: " + timeDisplay, 20, 60);
 
 
   if (keysPressed["ArrowLeft"] && player.x > 0) player.x -= player.speed;
