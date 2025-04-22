@@ -97,21 +97,16 @@ input, select {
   padding: 5px;
   margin: 5px;
 }
+#game {
+  background: url('gamepic.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
 #gameCanvas {
+  background-color: transparent; 
   display: block;
   margin: 0 auto;
-  background-color: #000;
-  border: 2px solid #fff;
-}
-#Game {
-  background-image: url("gamepic.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 
