@@ -103,8 +103,8 @@ input, select {
   background-color: #000;
   border: 2px solid #fff;
 }
-#Amazing Space Game {
-  background-image: url("space-background.jpg");
+#Game {
+  background-image: url("gamepic.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
