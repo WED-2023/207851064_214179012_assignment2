@@ -6,6 +6,8 @@ let lastEnemyShotTime = 0;
 let timeLeft; 
 let gameTimerInterval;
 let gameEnded = false;
+let currentUser = null;
+let userScores = {};
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
@@ -22,7 +24,6 @@ let users = [
 
 function handleRegister(event) {
   event.preventDefault();
-
   const username = document.getElementById('regUsername').value;
   const password = document.getElementById('regPassword').value;
   const confirmPassword = document.getElementById('regConfirmPassword').value;
@@ -76,8 +77,9 @@ function handleRegister(event) {
   }
   users.push({ username, password, email });
   alert('Registration successful!');
+  currentUser = username;
+  userScores[currentUser] = [];
   navigate('login');
-  localStorage.setItem("currentUser", username);
   return false;
 }
 
@@ -91,6 +93,8 @@ function handleLogin(event) {
 
     if (username === 'p' && password === 'testuser') {
     alert('Login successful as test user!');
+    currentUser = username;
+    if (!userScores[currentUser]) userScores[currentUser] = [];
     navigate('config');
     return;
   }
@@ -98,8 +102,9 @@ function handleLogin(event) {
   const found = users.find(user => user.username === username && user.password === password);
   if (found) {
     alert('Login successful!');
+    currentUser = username;
+    if (!userScores[currentUser]) userScores[currentUser] = [];
     navigate('config');
-    localStorage.setItem("currentUser", username);
   } else {
     error.textContent = 'Invalid username or password.';
   }
@@ -466,18 +471,18 @@ function endGame(reason) {
     message = "Champion!";
   }
   setTimeout(() => {
+    alert(message);
 saveScore(score);
 showScoreBoardInGame(message);
     }, 100);
 
 }
 function saveScore(currentScore) {
-  const currentUser = getCurrentUsername(); 
   if (!currentUser) return;
+  if (!userScores[currentUser]) userScores[currentUser] = [];
+  userScores[currentUser].push(score);
+}
 
-  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
-  scores.push(currentScore);
-  localStorage.setItem(currentUser, JSON.stringify(scores));
 }
 function showScoreBoard() {
   const currentUser = getCurrentUsername();
@@ -500,9 +505,7 @@ function showScoreBoard() {
 
   scoreListDiv.innerHTML = html;
 }
-function getCurrentUsername() {
-  return localStorage.getItem("currentUser");
-}
+
 function startNewGame() {
   gameEnded = false;
   resetGameState();
@@ -533,13 +536,12 @@ function showScoreBoardInGame(message) {
   const container = document.getElementById("scoreBoardInGame");
   container.innerHTML = "";
 
-  const currentUser = getCurrentUsername();
-  if (!currentUser) {
+  if (!currentUser || !userScores[currentUser]) {
     container.innerHTML = "<p>No user logged in.</p>";
     return;
   }
 
-  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
+  const scores = [...userScores[currentUser]];
   scores.sort((a, b) => b - a);
 
   let html = `<h3 style="margin-top:30px;">${message}</h3>`;
@@ -552,16 +554,7 @@ function showScoreBoardInGame(message) {
 
   container.innerHTML = html;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+function logout() {
+  currentUser = null;
+  navigate("welcome");
+}
