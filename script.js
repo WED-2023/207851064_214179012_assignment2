@@ -147,7 +147,6 @@ function openAboutModal() {
     }
 }
 
-
 // Close modal on X
 closeAbout.addEventListener('click', () => {
   aboutModal.style.display = 'none';
