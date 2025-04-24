@@ -315,7 +315,7 @@ function moveEnemies() {
     }
     //if (e.y + e.height > canvas.height * 0.5 || e.y < 0) {
       //e.dy *= -1; 
-    }
+    //}
   }
 
   if (hitEdge) {
