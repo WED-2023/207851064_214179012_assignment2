@@ -5,6 +5,7 @@ let canShoot = true;
 let lastEnemyShotTime = 0;
 let timeLeft; 
 let gameTimerInterval;
+let gameEnded = false;
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
@@ -254,6 +255,7 @@ player = {
 }
 
 function gameLoop() {
+  if (gameEnded) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let minutes = Math.floor(timeLeft / 60);
   let seconds = timeLeft % 60;
@@ -445,6 +447,7 @@ bgMusic.play();
 bgMusic.pause();
 bgMusic.currentTime = 0;
 function endGame(reason) {
+  gameEnded = true;
   clearInterval(gameInterval);
   clearInterval(gameTimerInterval);
   sounds.bgMusic.pause();
@@ -499,6 +502,7 @@ function getCurrentUsername() {
   return localStorage.getItem("currentUser");
 }
 function startNewGame() {
+  gameEnded = false;
   resetGameState();
   navigate("config");
 }
