@@ -241,7 +241,7 @@ function initGame() {
         dy: enemySpeed / 2
       });
     }
-  }
+  }}
 
 
   document.addEventListener("keydown", (e) => {
