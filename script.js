@@ -75,8 +75,8 @@ function handleRegister(event) {
   }
   users.push({ username, password, email });
   alert('Registration successful!');
+    localStorage.setItem("currentUser", username);
   navigate('login');
-  localStorage.setItem("currentUser", username);
   return false;
 }
 
@@ -90,6 +90,7 @@ function handleLogin(event) {
 
     if (username === 'p' && password === 'testuser') {
     alert('Login successful as test user!');
+    localStorage.setItem("currentUser", username);
     navigate('config');
     return;
   }
