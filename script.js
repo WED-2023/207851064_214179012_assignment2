@@ -96,7 +96,8 @@ function handleLogin(event) {
   const found = users.find(user => user.username === username && user.password === password);
   if (found) {
     alert('Login successful!');
-    navigate('config'); // we'll add this screen later
+    navigate('config');
+    localStorage.setItem("currentUser", username);
   } else {
     error.textContent = 'Invalid username or password.';
   }
@@ -465,6 +466,43 @@ function endGame(reason) {
   showScoreBoard();
   navigate("score");
 }
+function saveScore(currentScore) {
+  const currentUser = getCurrentUsername(); // מספק את שם המשתמש הנוכחי
+  if (!currentUser) return;
+
+  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
+  scores.push(currentScore);
+  localStorage.setItem(currentUser, JSON.stringify(scores));
+}
+function showScoreBoard() {
+  const currentUser = getCurrentUsername();
+  const scoreListDiv = document.getElementById("scoreList");
+  scoreListDiv.innerHTML = "";
+
+  if (!currentUser) {
+    scoreListDiv.innerHTML = "<p>No user logged in.</p>";
+    return;
+  }
+
+  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
+  scores.sort((a, b) => b - a);
+
+  let html = "<h3>Your High Scores:</h3><ol>";
+  scores.forEach(score => {
+    html += `<li>${score}</li>`;
+  });
+  html += "</ol>";
+
+  scoreListDiv.innerHTML = html;
+}
+function getCurrentUsername() {
+  return localStorage.getItem("currentUser");
+}
+function startNewGame() {
+  navigate("config");
+}
+
+
 
 
 
