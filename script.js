@@ -466,16 +466,18 @@ function endGame(reason) {
   } else if (reason === "win") {
     message = "Champion!";
   }
+  
   setTimeout(() => {
-  alert(message);
-  saveScore(score);
-  showScoreBoard();
-  navigate("score");
-    }, 100);
+    alert(message);
+    saveScore(score);
+    showScoreBoard();
+    navigate("score");
+  }, 100);
+}
 
 }
 function saveScore(currentScore) {
-  const currentUser = getCurrentUsername(); 
+const currentUser = getCurrentUsername();
   if (!currentUser) return;
 
   const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
@@ -503,6 +505,7 @@ function showScoreBoard() {
 
   scoreListDiv.innerHTML = html;
 }
+
 function getCurrentUsername() {
   return localStorage.getItem("currentUser");
 }
