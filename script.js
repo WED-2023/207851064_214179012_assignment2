@@ -526,13 +526,27 @@ function resetGameState() {
   }
 }
 
+function showScoreBoardInGame(message) {
+  const container = document.getElementById("scoreBoardInGame");
+  container.innerHTML = "";
 
+  const currentUser = getCurrentUsername();
+  if (!currentUser) {
+    container.innerHTML = "<p>No user logged in.</p>";
+    return;
+  }
 
+  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
+  scores.sort((a, b) => b - a);
 
+  let html = `<h3 style="margin-top:30px;">${message}</h3>`;
+  html += "<h4>Your High Scores:</h4><ol>";
 
+  scores.forEach(score => {
+    html += `<li>${score}</li>`;
+  });
+  html += "</ol>";
 
-
-
-
-
+  container.innerHTML = html;
+}
 
