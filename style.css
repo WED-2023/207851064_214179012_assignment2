@@ -87,15 +87,15 @@ button:hover {
 
 
 #gameCanvas {
-   background: url('gamepic.png') no-repeat center center;
+  background: url('gamepic.png') no-repeat center center;
   background-size: 100% 100%; 
   width: 900px;
   height: 600px;
   display: block;
-
   margin: 20px auto;
   border: 2px solid #00ffcc;
   border-radius: 10px;
+  background-color: transparent;
 }
 
 #scoreList table {
