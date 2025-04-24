@@ -5,6 +5,8 @@ let canShoot = true;
 let lastEnemyShotTime = 0;
 let timeLeft; 
 let gameTimerInterval;
+let dx = 0
+let dy = 0
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
