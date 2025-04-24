@@ -558,3 +558,4 @@ function showScoreBoardInGame(message) {
 
   container.innerHTML = html;
 }
+
