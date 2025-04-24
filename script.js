@@ -445,21 +445,26 @@ bgMusic.currentTime = 0;
 function endGame(reason) {
   clearInterval(gameInterval);
   clearInterval(gameTimerInterval);
-  bgMusic.pause();
-  bgMusic.currentTime = 0;
+  sounds.bgMusic.pause();
+  sounds.bgMusic.currentTime = 0;
 
-  if (reason === "time") {
-    alert("Time's up! Game over.");
-  } else if (reason === "death") {
-    alert("You lost all your lives!");
+  let message = "";
+  if (reason === "death") {
+    message = "You Lost!";
+  } else if (reason === "time") {
+    if (score < 100) {
+      message = `You can do better... Your score: ${score}`;
+    } else {
+      message = `Winner! Your score: ${score}`;
+    }
   } else if (reason === "win") {
-    alert("You won!");
+    message = "Champion!";
   }
-
-  navigate("welcome"); 
+  alert(message);
+  saveScore(score);
+  showScoreBoard();
+  navigate("score");
 }
-
-
 
 
 
