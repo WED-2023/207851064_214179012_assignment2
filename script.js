@@ -284,9 +284,6 @@ function gameLoop() {
   endGame("win");
 }
 
-
-
-
 }
 
 function drawPlayer() {
