@@ -5,8 +5,6 @@ let canShoot = true;
 let lastEnemyShotTime = 0;
 let timeLeft; 
 let gameTimerInterval;
-let dx = 0
-let dy = 0
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
@@ -236,12 +234,12 @@ function initGame() {
         width: 40,
         height: 30,
         row: r,
-        color: gameSettings.enemyColor || "#ff3366",
-        dx: enemySpeed,
-        dy: enemySpeed / 2
+        color: gameSettings.enemyColor || "#ff3366"
       });
     }
   }
+
+
   document.addEventListener("keydown", (e) => {
   keysPressed[e.key] = true;
 
@@ -284,6 +282,9 @@ function gameLoop() {
   endGame("win");
 }
 
+
+
+
 }
 
 function drawPlayer() {
@@ -305,26 +306,20 @@ function drawEnemies() {
 }
 
 function moveEnemies() {
-    let hitEdge = false;
+  const rightMost = Math.max(...enemies.map(e => e.x + e.width));
+  const leftMost = Math.min(...enemies.map(e => e.x));
+
+  if (rightMost >= canvas.width || leftMost <= 0) {
+    moveEnemiesDir *= -1;
+    for (let e of enemies) {
+      e.y += 10; 
+    }
+  }
 
   for (let e of enemies) {
-    e.x += e.dx;
-    e.y += e.dy;
-    if (e.x + e.width > canvas.width || e.x < 0) {
-      hitEdge = true;
-    }
-    if (e.y + e.height > canvas.height * 0.5 || e.y < 0) {
-      e.dy *= -1; 
-   }
-  }
-
-  if (hitEdge) {
-    for (let e of enemies) {
-      e.dx *= -1; 
-    }
+    e.x += moveEnemiesDir * enemySpeed;
   }
 }
-
 
 function increaseEnemySpeed() {
   if (enemySpeedIncreaseCount < 4) {
@@ -340,9 +335,7 @@ function shootPlayerBullet() {
     width: 6,
     height: 12,
     color: "#0f0",
-    speed: 7,
-    dx: (Math.random() - 0.5) * 2, 
-    dy: -7 
+    speed: 7
   };
 }
 function handleEnemyShooting() {
@@ -359,9 +352,7 @@ function handleEnemyShooting() {
           width: 6,
           height: 12,
           color: "#f00",
-          speed: enemyBulletSpeed,
-          dx: (Math.random() - 0.5) * 2, 
-          dy: enemyBulletSpeed
+          speed: enemyBulletSpeed
         });
         lastEnemyShotTime = now;
       }
@@ -369,19 +360,18 @@ function handleEnemyShooting() {
   }
 }
 function updateBullets() {
-if (playerBullet) {
-  playerBullet.x += playerBullet.dx;
-  playerBullet.y += playerBullet.dy;
-  if (playerBullet.y < 0 || playerBullet.x < 0 || playerBullet.x > canvas.width) {
-    playerBullet = null;
+  if (playerBullet) {
+    playerBullet.y -= playerBullet.speed;
+    if (playerBullet.y < 0) {
+      playerBullet = null;
+    }
   }
-}
 
   enemyBullets = enemyBullets.filter(bullet => bullet.y < canvas.height);
   for (let b of enemyBullets) {
-    b.y += b.dy;
-    b.x += b.dx;
-}}
+    b.y += b.speed;
+  }
+}
 
 function drawBullets() {
   if (playerBullet) {
@@ -562,8 +552,6 @@ function resetGameState() {
     sounds.bgMusic.currentTime = 0;
   }
 }
-
-
 function resetScores() {
   const currentUser = getCurrentUsername(); 
   if (!currentUser) {
@@ -578,4 +566,3 @@ function resetScores() {
     alert("Your scores were reset.");
   }
 }
-
