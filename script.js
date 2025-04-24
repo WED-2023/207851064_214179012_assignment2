@@ -5,7 +5,6 @@ let canShoot = true;
 let lastEnemyShotTime = 0;
 let timeLeft; 
 let gameTimerInterval;
-let gameEnded = false;
 function navigate(screenId) {
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
@@ -15,7 +14,7 @@ function navigate(screenId) {
     initGame();
   }
 }
-
+// Array of users
 let users = [
   { username: 'p', password: 'testuser', email: 'default@user.com' }
 ];
@@ -213,16 +212,15 @@ function initGame() {
   }
 }, 1000);
 
-  
 
-player = {
-  x: 20, 
-  y: canvas.height - 60,
-  width: 40,
-  height: 40,
-  color: gameSettings.playerColor || "#00ffcc",
-  speed: 5
-};
+  player = {
+    x: Math.random() * (canvas.width - 50),
+    y: canvas.height - 60,
+    width: 40,
+    height: 40,
+    color: gameSettings.playerColor || "#00ffcc",
+    speed: 5
+  };
   enemies = [];
   const rows = 4;
   const cols = 5;
@@ -256,7 +254,6 @@ player = {
 }
 
 function gameLoop() {
-  if (gameEnded) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let minutes = Math.floor(timeLeft / 60);
   let seconds = timeLeft % 60;
@@ -345,7 +342,7 @@ function handleEnemyShooting() {
 
   if (enemyBullets.length === 0 || (enemyBullets.length > 0 && enemyBullets[0].y > canvas.height * 0.75)) {
     if (now - lastEnemyShotTime > 1000) {
-      const shooters = enemies.filter(e => e); 
+      const shooters = enemies.filter(e => e); // enemies שעדיין קיימים
       if (shooters.length > 0) {
         const shooter = shooters[Math.floor(Math.random() * shooters.length)];
         enemyBullets.push({
@@ -448,7 +445,6 @@ bgMusic.play();
 bgMusic.pause();
 bgMusic.currentTime = 0;
 function endGame(reason) {
-  gameEnded = true;
   clearInterval(gameInterval);
   clearInterval(gameTimerInterval);
   sounds.bgMusic.pause();
@@ -466,18 +462,12 @@ function endGame(reason) {
   } else if (reason === "win") {
     message = "Champion!";
   }
-  
-  setTimeout(() => {
-    alert(message);
-    saveScore(score);
-    showScoreBoard();
-    navigate("score");
-  }, 100);
-}
+saveScore(score);
+showScoreBoardInGame(message);
 
 }
 function saveScore(currentScore) {
-const currentUser = getCurrentUsername();
+  const currentUser = getCurrentUsername(); 
   if (!currentUser) return;
 
   const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
@@ -505,12 +495,10 @@ function showScoreBoard() {
 
   scoreListDiv.innerHTML = html;
 }
-
 function getCurrentUsername() {
   return localStorage.getItem("currentUser");
 }
 function startNewGame() {
-  gameEnded = false;
   resetGameState();
   navigate("config");
 }
@@ -558,4 +546,3 @@ function showScoreBoardInGame(message) {
 
   container.innerHTML = html;
 }
-
