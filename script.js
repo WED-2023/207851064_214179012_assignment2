@@ -489,14 +489,41 @@ function showScoreBoard() {
   const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
   scores.sort((a, b) => b - a);
 
-  let html = "<h3>Your High Scores:</h3><ol>";
-  scores.forEach(score => {
-    html += `<li>${score}</li>`;
+  let html = `
+    <h3 style="color: #00ffcc; font-size: 24px;">🏆 Your High Scores 🏆</h3>
+    <table style="margin: 0 auto; border-collapse: collapse; color: white; width: 60%; font-size: 18px; border: 1px solid #555;">
+      <thead>
+        <tr style="background-color: #333;">
+          <th style="padding: 10px;">Rank</th>
+          <th style="padding: 10px;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  scores.forEach((score, index) => {
+    let rank = index + 1;
+    let medal = "";
+    if (rank === 1) medal = "🥇";
+    else if (rank === 2) medal = "🥈";
+    else if (rank === 3) medal = "🥉";
+
+    html += `
+      <tr style="background-color: ${index % 2 === 0 ? '#222' : '#111'};">
+        <td style="padding: 10px; text-align: center;">${medal || rank}</td>
+        <td style="padding: 10px; text-align: center;">${score}</td>
+      </tr>
+    `;
   });
-  html += "</ol>";
+
+  html += `
+      </tbody>
+    </table>
+  `;
 
   scoreListDiv.innerHTML = html;
 }
+
 function getCurrentUsername() {
   return localStorage.getItem("currentUser");
 }
@@ -526,28 +553,7 @@ function resetGameState() {
   }
 }
 
-function showScoreBoardInGame(message) {
-  const container = document.getElementById("scoreBoardInGame");
-  container.innerHTML = "";
 
-  if (!currentUser || !userScores[currentUser]) {
-    container.innerHTML = "<p>No user logged in.</p>";
-    return;
-  }
-
-  const scores = [...userScores[currentUser]];
-  scores.sort((a, b) => b - a);
-
-  let html = `<h3 style="margin-top:30px;">${message}</h3>`;
-  html += "<h4>Your High Scores:</h4><ol>";
-
-  scores.forEach(score => {
-    html += `<li>${score}</li>`;
-  });
-  html += "</ol>";
-
-  container.innerHTML = html;
-}
 function resetScores() {
   const currentUser = getCurrentUsername(); 
   if (!currentUser) {
@@ -558,7 +564,7 @@ function resetScores() {
   const confirmReset = confirm("Are you sure you want to reset your scores?");
   if (confirmReset) {
     localStorage.setItem(currentUser, JSON.stringify([]));
-    showScoreBoard(); // מציג שוב את הטבלה (ריקה)
+    showScoreBoard(); 
     alert("Your scores were reset.");
   }
 }
