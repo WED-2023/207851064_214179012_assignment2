@@ -327,7 +327,7 @@ function moveEnemies() {
     }
   }
 }
-}
+
 
 function increaseEnemySpeed() {
   if (enemySpeedIncreaseCount < 4) {
