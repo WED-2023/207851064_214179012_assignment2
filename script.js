@@ -342,7 +342,7 @@ function handleEnemyShooting() {
 
   if (enemyBullets.length === 0 || (enemyBullets.length > 0 && enemyBullets[0].y > canvas.height * 0.75)) {
     if (now - lastEnemyShotTime > 1000) {
-      const shooters = enemies.filter(e => e); // enemies שעדיין קיימים
+      const shooters = enemies.filter(e => e); 
       if (shooters.length > 0) {
         const shooter = shooters[Math.floor(Math.random() * shooters.length)];
         enemyBullets.push({
