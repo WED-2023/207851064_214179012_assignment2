@@ -77,9 +77,9 @@ function handleRegister(event) {
   }
   users.push({ username, password, email });
   alert('Registration successful!');
-  currentUser = username;
-  userScores[currentUser] = [];
-  navigate('login');
+currentUser = username;
+userScores[currentUser] = [];
+navigate('login');
   return false;
 }
 
@@ -92,11 +92,11 @@ function handleLogin(event) {
   error.textContent = '';
 
     if (username === 'p' && password === 'testuser') {
-    alert('Login successful as test user!');
-    currentUser = username;
-    if (!userScores[currentUser]) userScores[currentUser] = [];
-    navigate('config');
-    return;
+  alert('Login successful as test user!');
+  currentUser = username;
+  if (!userScores[currentUser]) userScores[currentUser] = [];
+  navigate('config');
+  return;
   }
 
   const found = users.find(user => user.username === username && user.password === password);
