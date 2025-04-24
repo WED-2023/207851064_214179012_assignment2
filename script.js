@@ -140,16 +140,13 @@ for (let i = 65; i <= 90; i++) {
   shootKeySelect.appendChild(opt);
 }
 };
-// ABOUT MODAL Logic
-const aboutModal = document.getElementById('aboutModal');
-aboutModal.showModal();
-//const aboutButton = document.querySelector('button[onclick="navigate(\'about\')"]');
-const closeAbout = document.getElementById('closeAbout');
+function openAboutModal() {
+    const modal = document.getElementById('aboutModal');
+    if (!modal.open) {
+        modal.showModal();
+    }
+}
 
-// Open modal when clicking "About"
-aboutButton.addEventListener('click', () => {
-  aboutModal.style.display = 'block';
-});
 
 // Close modal on X
 closeAbout.addEventListener('click', () => {
