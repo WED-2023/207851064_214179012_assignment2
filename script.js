@@ -76,6 +76,7 @@ function handleRegister(event) {
   users.push({ username, password, email });
   alert('Registration successful!');
   navigate('login');
+  localStorage.setItem("currentUser", username);
   return false;
 }
 
@@ -467,7 +468,7 @@ function endGame(reason) {
   navigate("score");
 }
 function saveScore(currentScore) {
-  const currentUser = getCurrentUsername(); // מספק את שם המשתמש הנוכחי
+  const currentUser = getCurrentUsername(); 
   if (!currentUser) return;
 
   const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
@@ -499,8 +500,31 @@ function getCurrentUsername() {
   return localStorage.getItem("currentUser");
 }
 function startNewGame() {
+  resetGameState();
   navigate("config");
 }
+function resetGameState() {
+  clearInterval(gameInterval);
+  clearInterval(gameTimerInterval);
+
+  player = null;
+  enemies = [];
+  playerBullet = null;
+  enemyBullets = [];
+  canShoot = true;
+  score = 0;
+  lives = 3;
+  timeLeft = 0;
+  enemySpeed = 1;
+  enemySpeedIncreaseCount = 0;
+  enemyBulletSpeed = 4;
+
+  if (sounds.bgMusic) {
+    sounds.bgMusic.pause();
+    sounds.bgMusic.currentTime = 0;
+  }
+}
+
 
 
 
