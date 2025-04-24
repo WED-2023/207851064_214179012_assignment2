@@ -465,8 +465,10 @@ function endGame(reason) {
   } else if (reason === "win") {
     message = "Champion!";
   }
+  setTimeout(() => {
 saveScore(score);
 showScoreBoardInGame(message);
+    }, 100);
 
 }
 function saveScore(currentScore) {
