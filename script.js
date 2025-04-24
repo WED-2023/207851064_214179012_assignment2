@@ -142,7 +142,7 @@ for (let i = 65; i <= 90; i++) {
 };
 // ABOUT MODAL Logic
 const aboutModal = document.getElementById('aboutModal');
-const aboutButton = document.querySelector('button[onclick="navigate(\'about\')"]');
+const aboutButton = document.querySelector('button[onclick="openAbout()"]');
 const closeAbout = document.getElementById('closeAbout');
 
 // Open modal when clicking "About"
