@@ -235,6 +235,8 @@ function initGame() {
         height: 30,
         row: r,
         color: gameSettings.enemyColor || "#ff3366"
+        dx: enemySpeed,
+        dy: enemySpeed / 2
       });
     }
   }
@@ -306,19 +308,25 @@ function drawEnemies() {
 }
 
 function moveEnemies() {
-  const rightMost = Math.max(...enemies.map(e => e.x + e.width));
-  const leftMost = Math.min(...enemies.map(e => e.x));
+    let hitEdge = false;
 
-  if (rightMost >= canvas.width || leftMost <= 0) {
-    moveEnemiesDir *= -1;
-    for (let e of enemies) {
-      e.y += 10; 
+  for (let e of enemies) {
+    e.x += e.dx;
+    e.y += e.dy;
+    if (e.x + e.width > canvas.width || e.x < 0) {
+      hitEdge = true;
+    }
+    if (e.y + e.height > canvas.height * 0.5 || e.y < 0) {
+      e.dy *= -1; 
     }
   }
 
-  for (let e of enemies) {
-    e.x += moveEnemiesDir * enemySpeed;
+  if (hitEdge) {
+    for (let e of enemies) {
+      e.dx *= -1; 
+    }
   }
+}
 }
 
 function increaseEnemySpeed() {
@@ -336,6 +344,8 @@ function shootPlayerBullet() {
     height: 12,
     color: "#0f0",
     speed: 7
+    dx: (Math.random() - 0.5) * 2,  // אופציה לתנועה אלכסונית קלה
+    dy: -7 
   };
 }
 function handleEnemyShooting() {
@@ -353,6 +363,8 @@ function handleEnemyShooting() {
           height: 12,
           color: "#f00",
           speed: enemyBulletSpeed
+          dx: (Math.random() - 0.5) * 2, 
+          dy: enemyBulletSpeed
         });
         lastEnemyShotTime = now;
       }
@@ -360,17 +372,18 @@ function handleEnemyShooting() {
   }
 }
 function updateBullets() {
-  if (playerBullet) {
-    playerBullet.y -= playerBullet.speed;
-    if (playerBullet.y < 0) {
-      playerBullet = null;
-    }
+if (playerBullet) {
+  playerBullet.x += playerBullet.dx;
+  playerBullet.y += playerBullet.dy;
+  if (playerBullet.y < 0 || playerBullet.x < 0 || playerBullet.x > canvas.width) {
+    playerBullet = null;
   }
+}
 
   enemyBullets = enemyBullets.filter(bullet => bullet.y < canvas.height);
   for (let b of enemyBullets) {
-    b.y += b.speed;
-  }
+    b.y += b.dy;
+    b.x += b.dx;
 }
 
 function drawBullets() {
