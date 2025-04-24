@@ -82,15 +82,21 @@
   </form>
 </div>
     <!-- Scoreboard screen -->
-<div id="score" class="screen">
-  <h2>Game Over</h2>
-  <div id="scoreList"></div>
-  <button onclick="startNewGame()">New Game</button>
-   <div id="scoreBoardInGame" style="margin-top: 30px;"></div>
-<button id="resetScoresBtn" onclick="resetScores()" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">
-  🔄 Reset My Scoreboard
-</button>
+<div id="score" class="screen" style="text-align: center; padding: 40px;">
+  <h2 style="color: #00ffcc; font-size: 32px;">Game Over</h2>
+  <div id="scoreList" style="margin-top: 30px;"></div>
+
+  <div style="margin-top: 30px;">
+    <button onclick="startNewGame()" style="padding: 12px 24px; font-size: 16px; border: none; background-color: #28a745; color: white; border-radius: 8px; cursor: pointer;">
+      🚀 New Game 🚀
+    </button>
+
+    <button onclick="resetScores()" style="padding: 12px 24px; font-size: 16px; border: none; background-color: #dc3545; color: white; border-radius: 8px; cursor: pointer; margin-left: 20px;">
+      🔄 Reset Scores 🔄 
+    </button>
+  </div>
 </div>
+
 
 
     <!-- Game Screen (accessible only after login) -->
