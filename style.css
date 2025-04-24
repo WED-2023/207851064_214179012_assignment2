@@ -1,4 +1,4 @@
-/* בסיס כללי */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -54,7 +54,7 @@ main {
   display: block;
 }
 
-/* טפסים */
+
 form label {
   display: block;
   margin: 10px 0;
@@ -70,7 +70,7 @@ form input, form select {
   font-size: 14px;
 }
 
-/* כפתורים */
+
 button {
   padding: 10px 20px;
   background-color: #0066ff;
@@ -85,16 +85,19 @@ button:hover {
   background-color: #0052cc;
 }
 
-/* עיצוב הקנבס */
+
 #gameCanvas {
-  background: transparent;
+   background: url('gamepic.png') no-repeat center center;
+  background-size: 100% 100%; 
+  width: 900px;
+  height: 600px;
   display: block;
+
   margin: 20px auto;
   border: 2px solid #00ffcc;
   border-radius: 10px;
 }
 
-/* טבלת ניקוד */
 #scoreList table {
   border-collapse: collapse;
   width: 80%;
@@ -121,7 +124,6 @@ button:hover {
   background-color: #1c1c1c;
 }
 
-/* דיאלוג about */
 .modal {
   display: none;
   position: fixed;
@@ -156,7 +158,6 @@ button:hover {
   color: white;
 }
 
-/* פוטר */
 footer {
   background-color: #111;
   color: #888;
