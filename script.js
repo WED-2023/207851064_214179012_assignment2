@@ -530,13 +530,12 @@ function showScoreBoardInGame(message) {
   const container = document.getElementById("scoreBoardInGame");
   container.innerHTML = "";
 
-  const currentUser = getCurrentUsername();
-  if (!currentUser) {
+  if (!currentUser || !userScores[currentUser]) {
     container.innerHTML = "<p>No user logged in.</p>";
     return;
   }
 
-  const scores = JSON.parse(localStorage.getItem(currentUser)) || [];
+  const scores = [...userScores[currentUser]];
   scores.sort((a, b) => b - a);
 
   let html = `<h2 style="color:#00ffcc; text-align:center;">${message}</h2>`;
@@ -553,15 +552,12 @@ function showScoreBoardInGame(message) {
   `;
 
   scores.forEach((score, index) => {
-    let rank = index + 1;
-    let medal = "";
-    if (rank === 1) medal = "🥇";
-    else if (rank === 2) medal = "🥈";
-    else if (rank === 3) medal = "🥉";
+    const rank = index + 1;
+    const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
 
     html += `
       <tr style="background-color: ${index % 2 === 0 ? '#222' : '#111'};">
-        <td style="padding: 8px; text-align: center;">${medal || rank}</td>
+        <td style="padding: 8px; text-align: center;">${medal}</td>
         <td style="padding: 8px; text-align: center;">${score}</td>
       </tr>
     `;
