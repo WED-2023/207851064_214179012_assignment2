@@ -236,8 +236,8 @@ function initGame() {
         width: 40,
         height: 30,
         row: r,
-        color: gameSettings.enemyColor || "#ff3366"
-        dx: enemySpeed
+        color: gameSettings.enemyColor || "#ff3366",
+        dx: enemySpeed,
         dy: enemySpeed / 2
       });
     }
