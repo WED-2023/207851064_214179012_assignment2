@@ -213,6 +213,7 @@ function initGame() {
   }
 }, 1000);
 
+  
 
 player = {
   x: 20, 
@@ -466,8 +467,10 @@ function endGame(reason) {
     message = "Champion!";
   }
   setTimeout(() => {
-saveScore(score);
-showScoreBoardInGame(message);
+  alert(message);
+  saveScore(score);
+  showScoreBoard();
+  navigate("score");
     }, 100);
 
 }
