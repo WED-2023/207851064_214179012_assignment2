@@ -293,6 +293,12 @@ function drawEnemies() {
   for (let enemy of enemies) {
     ctx.fillStyle = enemy.color;
     ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+
+    let points = (3 - enemy.row) * 5 + 5;
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 14px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(points, enemy.x + enemy.width / 2, enemy.y + enemy.height / 2 + 5);
   }
 }
 
