@@ -549,15 +549,17 @@ function showScoreBoardInGame(message) {
   container.innerHTML = html;
 }
 function resetScores() {
-  if (!currentUser || !userScores[currentUser]) {
-    alert("No user logged in or no scores to reset.");
+  const currentUser = getCurrentUsername(); 
+  if (!currentUser) {
+    alert("No user logged in.");
     return;
   }
 
   const confirmReset = confirm("Are you sure you want to reset your scores?");
   if (confirmReset) {
-    userScores[currentUser] = [];
-    showScoreBoardInGame("Your scores were reset.");
+    localStorage.setItem(currentUser, JSON.stringify([]));
+    showScoreBoard(); // מציג שוב את הטבלה (ריקה)
+    alert("Your scores were reset.");
   }
 }
 
