@@ -235,8 +235,8 @@ function initGame() {
         height: 30,
         row: r,
         color: gameSettings.enemyColor || "#ff3366"
-        dx: enemySpeed;
-        dy: enemySpeed / 2;
+        dx: enemySpeed
+        dy: enemySpeed / 2
       });
     }
   }
@@ -343,7 +343,7 @@ function shootPlayerBullet() {
     width: 6,
     height: 12,
     color: "#0f0",
-    speed: 7
+    speed: 7,
     dx: (Math.random() - 0.5) * 2, 
     dy: -7 
   };
@@ -362,7 +362,7 @@ function handleEnemyShooting() {
           width: 6,
           height: 12,
           color: "#f00",
-          speed: enemyBulletSpeed
+          speed: enemyBulletSpeed,
           dx: (Math.random() - 0.5) * 2, 
           dy: enemyBulletSpeed
         });
