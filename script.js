@@ -538,36 +538,26 @@ function showScoreBoardInGame(message) {
   const scores = [...userScores[currentUser]];
   scores.sort((a, b) => b - a);
 
-  let html = `<h2 style="color:#00ffcc; text-align:center;">${message}</h2>`;
-  html += `
-    <h3 style="text-align:center; margin-top:20px;">🏆 Your High Scores 🏆</h3>
-    <table style="margin: 0 auto; border-collapse: collapse; color: white; width: 60%; font-size: 18px;">
-      <thead>
-        <tr style="background-color: #333;">
-          <th style="padding: 8px;">Rank</th>
-          <th style="padding: 8px;">Score</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
+  let html = `<h3 style="margin-top:30px;">${message}</h3>`;
+  html += "<h4>Your High Scores:</h4><ol>";
 
-  scores.forEach((score, index) => {
-    const rank = index + 1;
-    const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : rank;
-
-    html += `
-      <tr style="background-color: ${index % 2 === 0 ? '#222' : '#111'};">
-        <td style="padding: 8px; text-align: center;">${medal}</td>
-        <td style="padding: 8px; text-align: center;">${score}</td>
-      </tr>
-    `;
+  scores.forEach(score => {
+    html += `<li>${score}</li>`;
   });
-
-  html += `
-      </tbody>
-    </table>
-  `;
+  html += "</ol>";
 
   container.innerHTML = html;
+}
+function resetScores() {
+  if (!currentUser || !userScores[currentUser]) {
+    alert("No user logged in or no scores to reset.");
+    return;
+  }
+
+  const confirmReset = confirm("Are you sure you want to reset your scores?");
+  if (confirmReset) {
+    userScores[currentUser] = [];
+    showScoreBoardInGame("Your scores were reset.");
+  }
 }
 
