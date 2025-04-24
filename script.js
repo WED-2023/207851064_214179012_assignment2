@@ -313,9 +313,10 @@ function moveEnemies() {
     if (e.x + e.width > canvas.width || e.x < 0) {
       hitEdge = true;
     }
-    //if (e.y + e.height > canvas.height * 0.5 || e.y < 0) {
-      //e.dy *= -1; 
-    //}
+
+
+
+    
   }
 
   if (hitEdge) {
