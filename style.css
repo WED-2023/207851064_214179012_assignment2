@@ -1,123 +1,167 @@
+/* בסיס כללי */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #000;
-  color: #fff;
-  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000010;
+  color: #ffffff;
 }
 
-header, nav, footer {
-  padding: 10px;
-  text-align: center;
+header {
   background-color: #111;
-}
-
-nav button {
-  margin: 5px;
-  padding: 10px 15px;
-  background-color: #222;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-nav button:hover {
-  background-color: #333;
-}
-
-#content .screen {
-  display: none;
+  color: #00ffcc;
+  text-align: center;
   padding: 20px;
+  border-bottom: 2px solid #00ffcc;
 }
 
-#content .active {
+header img {
+  margin-top: 10px;
+}
+
+nav#menu {
+  display: flex;
+  justify-content: center;
+  background-color: #222;
+  padding: 10px;
+}
+
+nav#menu button {
+  background-color: #00ffcc;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
+
+nav#menu button:hover {
+  background-color: #00dddd;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
   display: block;
 }
 
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1em;
-}
-form {
-  margin-top: 15px;
-  line-height: 2;
+/* טפסים */
+form label {
+  display: block;
+  margin: 10px 0;
+  font-size: 16px;
 }
 
-input, select {
-  padding: 5px;
-  margin: 5px;
-  width: 200px;
+form input, form select {
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  width: 250px;
+  font-size: 14px;
 }
+
+/* כפתורים */
+button {
+  padding: 10px 20px;
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0052cc;
+}
+
+/* עיצוב הקנבס */
+#gameCanvas {
+  background: transparent;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #00ffcc;
+  border-radius: 10px;
+}
+
+/* טבלת ניקוד */
+#scoreList table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#scoreList th, #scoreList td {
+  border: 1px solid #444;
+  padding: 12px;
+  text-align: center;
+}
+
+#scoreList th {
+  background-color: #222;
+  color: #00ffcc;
+}
+
+#scoreList tr:nth-child(even) {
+  background-color: #111;
+}
+
+#scoreList tr:nth-child(odd) {
+  background-color: #1c1c1c;
+}
+
+/* דיאלוג about */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
-  padding-top: 80px;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
 }
 
 .modal-content {
   background-color: #222;
-  margin: auto;
+  margin: 10% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 60%;
-  color: #fff;
+  border: 2px solid #00ffcc;
+  width: 80%;
+  color: white;
   border-radius: 10px;
-  position: relative;
 }
 
-.close {
+.modal .close {
   color: #aaa;
-  position: absolute;
-  top: 10px;
-  left: 15px;
+  float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.close:hover {
-  color: #fff;
-}
-#config form {
-  margin-top: 20px;
-  line-height: 2;
+.modal .close:hover {
+  color: white;
 }
 
-#config select, 
-#config input[type="number"],
-#config input[type="color"] {
-  padding: 5px;
-  margin: 5px;
-}
-#game {
-  background-color: black; 
+/* פוטר */
+footer {
+  background-color: #111;
+  color: #888;
   text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  border-top: 1px solid #00ffcc;
 }
-
-#gameCanvas {
-  background: url('gamepic.png') no-repeat center center;
-  background-size: 100% 100%; 
-  width: 900px;
-  height: 600px;
-  display: block;
-  margin: 20px auto;
-  border: 2px solid white;
-  background-color: transparent;
-}
-#game button#newGameBtn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
