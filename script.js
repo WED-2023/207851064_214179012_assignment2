@@ -384,7 +384,7 @@ if (playerBullet) {
   for (let b of enemyBullets) {
     b.y += b.dy;
     b.x += b.dx;
-}
+}}
 
 function drawBullets() {
   if (playerBullet) {
