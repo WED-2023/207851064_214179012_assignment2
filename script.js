@@ -213,14 +213,14 @@ function initGame() {
 }, 1000);
 
 
-  player = {
-    x: Math.random() * (canvas.width - 50),
-    y: canvas.height - 60,
-    width: 40,
-    height: 40,
-    color: gameSettings.playerColor || "#00ffcc",
-    speed: 5
-  };
+player = {
+  x: 20, 
+  y: canvas.height - 60,
+  width: 40,
+  height: 40,
+  color: gameSettings.playerColor || "#00ffcc",
+  speed: 5
+};
   enemies = [];
   const rows = 4;
   const cols = 5;
