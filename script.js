@@ -15,7 +15,7 @@ function navigate(screenId) {
     initGame();
   }
 }
-// Array of users
+
 let users = [
   { username: 'p', password: 'testuser', email: 'default@user.com' }
 ];
