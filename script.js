@@ -174,10 +174,11 @@ if (aboutButton && aboutModal && closeAbout) {
 }
 
 let gameSettings = {};
+const backgroundMusic = document.getElementById('backgroundMusic');
 
 function startGame(event) {
+  backgroundMusic.play();
   event.preventDefault();
-
   const shootKey = document.getElementById('shootKey').value;
   const gameTime = parseInt(document.getElementById('gameTime').value);
   const playerColor = document.getElementById('playerColor').value;
@@ -403,6 +404,7 @@ function checkCollisions() {
         playerBullet.y + playerBullet.height > e.y
       ) {
 
+        SOUNDS.hitSound.play();
         score += (4 - e.row) * 5; 
         enemies.splice(i, 1);
         playerBullet = null;
@@ -419,6 +421,7 @@ function checkCollisions() {
       b.y < player.y + player.height &&
       b.y + b.height > player.y
     ) {
+      SOUNDS.explosionSound.play();
       lives--;
       enemyBullets.splice(i, 1);
       resetPlayerPosition();
@@ -435,26 +438,13 @@ function resetPlayerPosition() {
   player.x = 20;
   player.y = canvas.height - 60;
 }
-const sounds = {
-  shoot: new Audio("798849__amypix__sci-fi-gunshot.wav"),
-  enemyShoot: new Audio("797452__markusrobam__gunshot.wav"),
-  hitEnemy: new Audio("799459__copyc4t__wooden-door-percussion-hits.wav"),
-  playerHit: new Audio("798875__artninja__tmnt_2012_inspired_heavy_kick_thud_sounds_final_04152025.wav"),
-  bgMusic: new Audio("798275__kontraa__hovecraft-hyperpop-instrumental.mp3")
-};
-sounds.bgMusic.loop = true;
-shoot.play();
-enemyShoot.play();
-hitEnemy.play();
-playerHit.play();
-bgMusic.play();
-bgMusic.pause();
-bgMusic.currentTime = 0;
+
+
 function endGame(reason) {
   clearInterval(gameInterval);
   clearInterval(gameTimerInterval);
-  sounds.bgMusic.pause();
-  sounds.bgMusic.currentTime = 0;
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
 
   let message = "";
   if (reason === "death") {
@@ -553,9 +543,9 @@ function resetGameState() {
   enemyBulletSpeed = 4;
   keysPressed = {};
 
-  if (sounds.bgMusic) {
-    sounds.bgMusic.pause();
-    sounds.bgMusic.currentTime = 0;
+  if (backgroundMusic) {
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
   }
   if (ctx && canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
