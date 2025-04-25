@@ -91,6 +91,7 @@ function handleLogin(event) {
     if (username === 'p' && password === 'testuser') {
     alert('Login successful as test user!');
     localStorage.setItem("currentUser", username);
+    resetGameState();
     navigate('config');
     return;
   }
@@ -98,6 +99,7 @@ function handleLogin(event) {
   const found = users.find(user => user.username === username && user.password === password);
   if (found) {
     alert('Login successful!');
+    resetGameState();
     navigate('config');
     localStorage.setItem("currentUser", username);
   } else {
@@ -549,10 +551,14 @@ function resetGameState() {
   enemySpeed = 1;
   enemySpeedIncreaseCount = 0;
   enemyBulletSpeed = 4;
+  keysPressed = {};
 
   if (sounds.bgMusic) {
     sounds.bgMusic.pause();
     sounds.bgMusic.currentTime = 0;
+  }
+  if (ctx && canvas) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
 function resetScores() {
