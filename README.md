@@ -1,6 +1,6 @@
 # Space Shooter Game 
 
-This is a simple space shooter game developed as part of the **Web Development Environments** course at Ben-Gurion University of the Negev, Spring 2025.
+This is a space shooter game developed as part of the **Web Development Environments** course at Ben-Gurion University of the Negev, Spring 2025.
 
 The project was developed using **HTML5**, **CSS**, and **JavaScript**, and is inspired by classic arcade-style space games.
 
