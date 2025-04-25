@@ -140,35 +140,36 @@ for (let i = 65; i <= 90; i++) {
   shootKeySelect.appendChild(opt);
 }
 };
-// ABOUT MODAL Logic
 const aboutModal = document.getElementById('aboutModal');
-const aboutButton = document.querySelector('button[onclick="navigate(\'about\')"]');
+const aboutButton = document.getElementById('aboutBtn'); 
 const closeAbout = document.getElementById('closeAbout');
 
-// Open modal when clicking "About"
-aboutButton.addEventListener('click', () => {
-  aboutModal.style.display = 'block';
-});
 
-// Close modal on X
-closeAbout.addEventListener('click', () => {
-  aboutModal.style.display = 'none';
-});
+if (aboutButton && aboutModal && closeAbout) {
+  // Open modal when clicking "About"
+  aboutButton.addEventListener('click', () => {
+    aboutModal.style.display = 'block';
+  });
 
-// Close modal when clicking outside content
-window.addEventListener('click', (event) => {
-  if (event.target === aboutModal) {
+  // Close modal on X
+  closeAbout.addEventListener('click', () => {
     aboutModal.style.display = 'none';
-  }
-});
+  });
 
-// Close modal on ESC key
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    aboutModal.style.display = 'none';
-  }
-});
+  // Close modal when clicking outside content
+  window.addEventListener('click', (event) => {
+    if (event.target === aboutModal) {
+      aboutModal.style.display = 'none';
+    }
+  });
 
+  // Close modal on ESC key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      aboutModal.style.display = 'none';
+    }
+  });
+}
 
 let gameSettings = {};
 
