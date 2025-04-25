@@ -14,6 +14,9 @@ You control a spaceship that can move in all directions and shoot projectiles to
 - Real-time scoring system
 - High score table (temporary per session) with the possibility to reset them (if you dont want that your friend will see how bad you are).
 - Game Over screen with final score and “New Game” button
+- Easy login and registration option
+- Nevigation in the website is quite easy with the HOME and ABOUT buttons that get you to home page and show you whatever you need to know about the game.
+- Config screen which is understandable and easy to choose.
 
 ## Website Author
 The site and game were created by:
