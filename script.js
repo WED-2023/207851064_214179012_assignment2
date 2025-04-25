@@ -11,6 +11,10 @@ const SOUNDS = {
 };
 
 function navigate(screenId) {
+  if (screenId !== "game") {
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
+}
   const screens = document.querySelectorAll(".screen");
   screens.forEach(screen => screen.classList.remove("active"));
   document.getElementById(screenId).classList.add("active");
