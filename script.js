@@ -404,10 +404,10 @@ function checkCollisions() {
         playerBullet.y + playerBullet.height > e.y
       ) {
 
-        SOUNDS.hitSound.play();
         score += (4 - e.row) * 5; 
         enemies.splice(i, 1);
         playerBullet = null;
+        SOUNDS.hitSound.play();
         break;
       }
     }
@@ -421,9 +421,10 @@ function checkCollisions() {
       b.y < player.y + player.height &&
       b.y + b.height > player.y
     ) {
-      SOUNDS.explosionSound.play();
+      
       lives--;
       enemyBullets.splice(i, 1);
+      SOUNDS.explosionSound.play();
       resetPlayerPosition();
       break;
     }
