@@ -16,7 +16,7 @@ You control a spaceship that can move in all directions and shoot projectiles to
 - Game Over screen with final score and “New Game” button
 - Easy login and registration option
 - Nevigation in the website is quite easy with the HOME and ABOUT buttons that get you to home page and show you whatever you need to know about the game.
-- Config screen which is understandable and easy to choose.
+- Config screen which is understandable.
 
 ## Website Author
 The site and game were created by:
