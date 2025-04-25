@@ -169,6 +169,7 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+
 let gameSettings = {};
 
 function startGame(event) {
