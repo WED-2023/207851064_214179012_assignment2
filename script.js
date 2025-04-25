@@ -150,7 +150,6 @@ aboutButton.addEventListener('click', () => {
   aboutModal.style.display = 'block';
 });
 
-
 // Close modal on X
 closeAbout.addEventListener('click', () => {
   aboutModal.style.display = 'none';
@@ -169,6 +168,7 @@ document.addEventListener('keydown', (event) => {
     aboutModal.style.display = 'none';
   }
 });
+
 let gameSettings = {};
 
 function startGame(event) {
